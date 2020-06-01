@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html {
+    font-size: 10px;
+    // height: 100%; // new
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    @include font($size: 1.6rem, $weight: normal);
+    // height: 100%; // new
+    // overflow: hidden;
+    // display: flex;
+}
+
+.event-none {
+    pointer-events: none;
+    opacity: .4;
+}
+
+.hidden {
+    display: none;
+}
+
+.loader {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    z-index: 10;
+}
+
+.weather-opacity {
+    opacity: 0;
+    -webkit-transition: opacity 250ms;
+    -moz-transition: opacity 250ms;
+    -ms-transition: opacity 250ms;
+    transition: opacity 250ms;
+}
+
+.weather-opacity-full {
+    opacity: 1;
+}
+
+.wave {
+    animation: 0.5s infinite alternate opacity;          
+}
