@@ -3,13 +3,12 @@ export default async (group, page) => {
   const response = await fetch(url);
   const data = await response.json();
   const sentences = [];
-  data.forEach((value, index) => {
-    const sentence = value.textExample.split(' ');
-    if (sentence.length < 11) {
-      if (index < 11) {
-        sentences.push(sentence);
-      }
+  data.forEach((value) => {
+    const newValue = value.textExample.replace(/<b>|<\/b>/g, '');
+    const sentence = newValue.split(' ');
+    if (sentence.length < 11 && sentences.length < 10) {
+      sentences.push(sentence);
     }
   });
-  return sentences;
+  return sentences.sort(() => Math.random() - 0.5);
 };

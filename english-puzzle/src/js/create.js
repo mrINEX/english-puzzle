@@ -120,8 +120,6 @@ function createSignPage(mode) {
 }
 
 function createMainPage() {
-  existRemove('.start-page');
-
   const mainPage = createElement('div', {
     classList: ['main-page'],
   });
@@ -174,6 +172,7 @@ function createMainPage() {
   mainPageNav.append(wrapperLevel, wrapperLevelPage);
   mainPage.append(mainPageNav);
   document.querySelector('body').append(mainPage);
+  return { level: selectLevel, page: selectLevelPage };
 }
 
 function createStartPage() {
@@ -198,7 +197,10 @@ function createStartPage() {
     classList: ['start-page__button', 'btn'],
     innerText: 'Start',
   });
-  startPageButton.onclick = createMainPage;
+  startPageButton.onclick = () => {
+    // existRemove('.start-page');
+    startPage.remove();
+  };
   startPage.append(startPageTitle, startPageText, startPageButton);
   document.querySelector('body').append(startPage);
 }
@@ -239,4 +241,5 @@ document.querySelector('body').append(header);
 export {
   createSignPage,
   createStartPage,
+  createMainPage,
 };
