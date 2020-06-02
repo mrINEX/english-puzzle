@@ -7,7 +7,7 @@ module.exports = {
   entry: ['./src/index.js', './src/scss/style.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   mode: 'development', // production
   devtool: 'source-map',
@@ -15,11 +15,11 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       favicon: './src/assets/img/favicon.jpg',
-      title: 'speakit',
+      title: 'english-puzzle',
       filename: '../index.html', // [duild]: filename: '../index.html' [watch] filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: 'style.css',
     }),
   ],
   module: {
@@ -30,14 +30,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: {
+                    esmodules: true,
+                  },
+                },
+              ],
+            ],
+          },
+        },
       }, {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
-        ]
+          MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',
+        ],
       }, {
         test: /\.(png|svg|jpe?g|gif)$/,
         use: [
@@ -48,7 +57,7 @@ module.exports = {
       }, {
         test: /\.html$/,
         loader: 'html-loader',
-      }
-    ]
+      },
+    ],
   },
 };

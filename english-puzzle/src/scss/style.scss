@@ -5,12 +5,13 @@
 @import "./abstract/keyframes";
 
 // layouts
-@import "./layouts/wrapper";
+@import "./layouts/btn";
+@import "./layouts/header";
 
 // components
-@import "./components/nav";
-@import "./components/main";
-@import "./components/map";
+@import "./components/start-page";
+@import "./components/sign-page";
+@import "./components/main-page";
 
 // bases
 @import "./base/base";
