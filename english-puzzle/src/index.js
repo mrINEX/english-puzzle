@@ -9,7 +9,11 @@ window.onload = () => {
     createStartPage();
     const { level, page } = createMainPage();
     let user;
-    getPhrase(0, 0).then((sentences) => { user = new User(sentences); console.log(user); });
+    getPhrase(level.value, page.value)
+      .then((sentences) => {
+        user = new User(sentences);
+        user.doThePuzzle();
+      });
 
     level.addEventListener('change', () => {
       getPhrase(level.value, page.value)

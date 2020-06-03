@@ -1,11 +1,66 @@
 .main-page {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-page-nav {
   display: flex;
-  justify-content: center;
   > * {
     padding: 0 5px;
   }
+}
+
+.wrapper-game {
+  width: 800px;
+  position: relative;
+  display: flex;
+}
+
+.wrapper-game-puzzle {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper-sentences-game {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.image-sentences-game {
+  z-index: -1;
+  width: 100%;
+  position: relative;
+}
+
+.sentence-game {
+  display: flex;
+  height: 100%;
+}
+
+.sentence-game-puzzle {
+  display: flex;
+}
+
+.word-game {
+  border: 1px solid darkred;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word-game-puzzle {
+  border: 1px solid darkred;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
