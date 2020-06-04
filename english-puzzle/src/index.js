@@ -8,21 +8,25 @@ window.onload = () => {
   if (token) {
     createStartPage();
     const { level, page } = createMainPage();
-    let user;
+    let current;
     getPhrase(level.value, 10)
-      .then((sentences) => {
-        user = new User(sentences);
-        user.prepareForMakePuzzle();
+      .then((nodes) => {
+        current = new User(nodes);
+        current.prepareForMakePuzzle();
       });
 
     level.addEventListener('change', () => {
       getPhrase(level.value, page.value)
-        .then((sentences) => { user = new User(sentences); console.log(user); });
+        .then((nodes) => {
+          current = new User(nodes);
+        });
     });
 
     page.addEventListener('change', () => {
       getPhrase(level.value, page.value)
-        .then((sentences) => { user = new User(sentences); console.log(user); });
+        .then((nodes) => {
+          current = new User(nodes);
+        });
     });
   } else {
     createSignPage('IN');

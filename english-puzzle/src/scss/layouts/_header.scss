@@ -5,3 +5,41 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.main-page-nav {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  > * {
+    padding: 0 5px;
+  }
+}
+
+.wrapper-prompt {
+  display: flex;
+}
+
+.prompt {
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
+}
+
+.audio-prompt {
+  background: url('../assets/img/micro.svg');
+}
+
+.translate-prompt {
+  background: url('../assets/img/translate-prompt.svg');
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.volume-prompt {
+  background: goldenrod;
+}
+
+.image-prompt {
+  background: gold;
+}

@@ -15,7 +15,9 @@ export default () => {
     puzzleGame.append(sentencePuzzle);
 
     let widthPuzzle = 0;
+    let sentenceText = '';
     [...sentence.children].forEach((word, index) => {
+      sentenceText += word.textContent;
       const bound = word.getBoundingClientRect();
 
       let width = Number(bound.width.toFixed(2));
@@ -49,6 +51,7 @@ export default () => {
       widthPuzzle += Number(bound.width.toFixed(2));
       sentencePuzzle.append(wordPuzzle);
     });
+    sentencePuzzle.setAttribute('data-sentenceText', `${sentenceText}`);
   });
   document.querySelector('.main-page').append(puzzleGame);
   return puzzleGame;

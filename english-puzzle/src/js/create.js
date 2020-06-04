@@ -169,7 +169,26 @@ function createMainPage() {
   }
   wrapperLevelPage.append(labelLevelPage, selectLevelPage);
 
-  mainPageNav.append(wrapperLevel, wrapperLevelPage);
+  const wrapperPrompt = createElement('div', {
+    classList: ['wrapper-prompt'],
+  });
+
+  const audioPrompt = createElement('div', {
+    classList: ['audio-prompt', 'prompt'],
+    title: 'on / off audio prompt',
+  });
+  const translatePrompt = createElement('div', {
+    classList: ['translate-prompt', 'prompt'],
+  });
+  const volumePrompt = createElement('div', {
+    classList: ['volume-prompt', 'prompt'],
+  });
+  const imagePrompt = createElement('div', {
+    classList: ['image-prompt', 'prompt'],
+  });
+  wrapperPrompt.append(audioPrompt, translatePrompt, volumePrompt, imagePrompt);
+
+  mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);
   mainPage.append(mainPageNav);
   document.querySelector('body').append(mainPage);
   return { level: selectLevel, page: selectLevelPage };
