@@ -6,7 +6,7 @@ export default class User {
     this.sentences = sentences;
   }
 
-  doThePuzzle() {
+  prepareForMakePuzzle() {
     const wrapperGame = createElement('div', {
       classList: ['wrapper-game'],
     });
@@ -17,7 +17,9 @@ export default class User {
       classList: ['image-sentences-game'],
       src: './src/assets/evening in Kair.jpg',
     });
-    imageSentencesGame.onload = createPuzzle;
+    imageSentencesGame.onload = () => {
+      this.puzzle = createPuzzle();
+    };
 
     this.sentences.forEach((sentence, index) => {
       const sentenceGame = createElement('div', {
@@ -27,7 +29,8 @@ export default class User {
         const wordGame = createElement('div', {
           classList: ['word-game'],
           innerText: `${word}`,
-          draggable: true,
+          'data-key-word': `${word}`,
+          'data-key-sentence': `${index}`,
         });
         sentenceGame.append(wordGame);
       });

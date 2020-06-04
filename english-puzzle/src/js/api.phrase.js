@@ -4,6 +4,7 @@ export default async (group, page) => {
   const data = await response.json();
   const sentences = [];
   data.sort(() => Math.random() - 0.5);
+  console.log(data);
   data.forEach((value) => {
     const newValue = value.textExample.replace(/<b>|<\/b>/g, '');
     const sentence = newValue.split(' ');
