@@ -28,7 +28,7 @@ export default (data) => {
     [...sentence.children].forEach((word, index) => {
       const bound = word.getBoundingClientRect();
 
-      let width = Number(bound.width.toFixed(2));
+      let width = Number(bound.width);
       if (sentence.children.length - 1 > index) {
         width += 10;
       }
@@ -41,11 +41,11 @@ export default (data) => {
         'data-key-sentence': `${heightIndex}`,
       }, {
         width: `${width}px`,
-        height: `${bound.height.toFixed(2) - 0.2}px`,
+        height: `${bound.height}px`,
         background: 'url("./src/assets/evening in Kair.jpg")',
-        'background-size': `${bounding.width.toFixed(2)}px`,
+        'background-size': `${bounding.width}px`,
         'background-position-x': `-${widthPuzzle}px`,
-        'background-position-y': `-${bound.height.toFixed(2) * heightIndex}px`,
+        'background-position-y': `-${bound.height * heightIndex}px`,
       });
 
       if (index === 0) {
@@ -57,7 +57,7 @@ export default (data) => {
       if (sentence.children.length - 1 === index) {
         wordPuzzle.classList.add('last-puzzle');
       }
-      widthPuzzle += Number(bound.width.toFixed(2));
+      widthPuzzle += Number(bound.width);
 
       const assembledWordPuzzle = wordPuzzle.cloneNode(true);
       if (!assembledWordPuzzle.classList.contains('last-puzzle')) {
@@ -70,6 +70,5 @@ export default (data) => {
   });
   [...wrapperGame.children].forEach((node) => node.remove());
   wrapperGame.append(assembledPuzzleGame);
-  document.querySelector('.main-page').append(puzzleGame);
   return puzzleGame;
 };

@@ -21,15 +21,53 @@ export default class User {
         sentenceNode.path = path;
         sentenceNode.audio = new Audio(path);
         sentenceNode.sentenceAudio = value.audioExample;
-        // translate(sentenceText).then(([translateText]) => {
-        //   sentenceNode.translateText = translateText;
-        // });
-
         sentences.push(sentenceNode);
       }
     });
     console.log('sentences:', sentences);
     this.sentences = sentences; // .sort(() => Math.random() - 0.5);
+  }
+
+  async runGame() {
+    console.log(this);
+    const game = document.querySelector('.wrapper-game');
+    const nav = document.querySelector('.main-page-nav');
+    const text = await translate(this.sentences[0].sentenceText);
+
+    const wrapperAutoPronunciation = createElement('div', {
+      classList: ['wrapper-auto-pronunciation'],
+    });
+    const pronunciationAudio = createElement('div', {
+      classList: ['pronunciation-audio', 'prompt'],
+      title: 'pronunciation audio',
+    });
+    pronunciationAudio.onclick = () => {
+      this.sentences[0].audio.play();
+    };
+    const pronunciationText = createElement('div', {
+      classList: ['pronunciation-text'],
+      title: 'pronunciation text',
+      innerText: `${text}`,
+    });
+
+    const wrapperGameRound = createElement('div', {
+      classList: ['wrapper-game-round'],
+    });
+
+    const gameRoundWords = createElement('div', {
+      classList: ['game-round-words'],
+    });
+    const gameRoundControls = createElement('div', {
+      classList: ['game-round-controls'],
+    });
+    wrapperGameRound.append(gameRoundWords, gameRoundControls);
+
+    const shuffle = [...this.puzzle.children[0].children].sort(() => Math.random() - 0.5);
+    gameRoundWords.append(...shuffle);
+
+    wrapperAutoPronunciation.append(pronunciationAudio, pronunciationText);
+    nav.after(wrapperAutoPronunciation);
+    game.after(wrapperGameRound);
   }
 
   prepareForMakePuzzle() {
@@ -41,9 +79,6 @@ export default class User {
       classList: ['image-sentences-game'],
       src: './src/assets/evening in Kair.jpg',
     });
-    imageSentencesGame.onload = () => {
-      this.puzzle = createPuzzle(this.sentences);
-    };
 
     this.sentences.forEach((sentenceNode, index) => {
       const sentenceGame = createElement('div', {
@@ -62,5 +97,6 @@ export default class User {
     });
     wrapperGame.append(wrapperSentencesGame, imageSentencesGame);
     document.querySelector('.main-page').append(wrapperGame);
+    return imageSentencesGame;
   }
 }

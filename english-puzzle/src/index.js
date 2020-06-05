@@ -1,4 +1,5 @@
 import { createSignPage, createStartPage, createMainPage } from './js/create';
+import createPuzzle from './js/createPuzzle';
 import getPhrase from './js/api.phrase';
 import User from './js/User';
 
@@ -9,10 +10,14 @@ window.onload = () => {
     createStartPage();
     const { level, page } = createMainPage();
     let current;
-    getPhrase(level.value, 10)
+    getPhrase(level.value, 13)
       .then((nodes) => {
         current = new User(nodes);
-        current.prepareForMakePuzzle();
+        const image = current.prepareForMakePuzzle();
+        image.onload = () => {
+          current.puzzle = createPuzzle(current.sentences);
+          current.runGame();
+        };
       });
 
     level.addEventListener('change', () => {

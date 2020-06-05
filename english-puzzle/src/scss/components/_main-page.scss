@@ -67,14 +67,15 @@
 }
 
 .first-puzzle {
-  clip-path: polygon(0% 0%, calc(100% - 10px) 0%, calc(100% - 10px) 40%, calc(100% - 5px) 35%, 100% 40%, 100% 60%, calc(100% - 5px) 65%, calc(100% - 10px) 60%, calc(100% - 10px) 100%, 0% 100%, 0% 0%);
+  padding-left: 0;
+  clip-path: polygon(0% 1%, calc(100% - 10px) 1%, calc(100% - 10px) 40%, calc(100% - 5px) 35%, 100% 40%, 100% 60%, calc(100% - 5px) 65%, calc(100% - 10px) 60%, calc(100% - 10px) 99%, 0% 99%, 0% 0%);
 }
 
 .center-puzzle {
-  clip-path: polygon(0% 0%, calc(100% - 10px) 0%, calc(100% - 10px) 40%, calc(100% - 5px) 35%, 100% 40%, 100% 60%, calc(100% - 5px) 65%, calc(100% - 10px) 60%, calc(100% - 10px) 100%, 0% 100%, 0% 61%, 5px 66%, 11px 60%, 11px 40%, 5px 34%, 0% 39%);
-  // clip-path: polygon(0% 0%, calc(100% - 10px) 0%, calc(100% - 10px) 40%, calc(100% - 5px) 35%, 100% 40%, 100% 60%, calc(100% - 5px) 65%, calc(100% - 10px) 60%, calc(100% - 10px) 100%, 0% 100%, 0% 60%, 5px 65%, 10px 60%, 10px 40%, 5px 35%, 0% 40%);
+  clip-path: polygon(1% 1%, calc(100% - 10px) 1%, calc(100% - 10px) 40%, calc(100% - 5px) 35%, 100% 40%, 100% 60%, calc(100% - 5px) 65%, calc(100% - 10px) 60%, calc(100% - 10px) 99%, 1% 99%, 1% 63%, 5px 67%, 11px 61%, 11px 39%, 5px 33%, 1% 37%);
 }
 
 .last-puzzle {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 61%, 5px 66%, 10px 61%, 10px 39%, 5px 34%, 0% 39%);
+  padding-right: 0;
+  clip-path: polygon(1% 1%, 100% 1%, 100% 99%, 1% 99%, 1% 63%, 5px 67%, 11px 61%, 11px 39%, 5px 33%, 1% 37%);
 }

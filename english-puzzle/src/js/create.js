@@ -260,15 +260,6 @@ pageSignUp.onclick = () => {
 header.append(logout, pageSignIn, pageSignUp);
 document.querySelector('body').append(header);
 
-// const wrapperAutoPronunciation = createElement('div', {
-//   classList: ['wrapper-auto-pronunciation'],
-// });
-// const pronunciationAudio = createElement('div', {
-//   classList: ['pronunciation-audio'],
-//   title: 'pronunciation audio',
-// });
-// wrapperAutoPronunciation.append(pronunciationAudio);
-
 export {
   createSignPage,
   createStartPage,

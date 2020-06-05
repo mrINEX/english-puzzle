@@ -9,7 +9,6 @@
 .main-page-nav {
   display: flex;
   align-items: center;
-  padding: 10px;
   > * {
     padding: 0 5px;
   }
@@ -17,6 +16,12 @@
 
 .wrapper-prompt {
   display: flex;
+}
+
+.wrapper-auto-pronunciation {
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
 .prompt {
