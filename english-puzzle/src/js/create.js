@@ -179,12 +179,15 @@ function createMainPage() {
   });
   const translatePrompt = createElement('div', {
     classList: ['translate-prompt', 'prompt'],
+    title: 'on / off translate prompt',
   });
   const volumePrompt = createElement('div', {
     classList: ['volume-prompt', 'prompt'],
+    title: 'on / off volume prompt',
   });
   const imagePrompt = createElement('div', {
     classList: ['image-prompt', 'prompt'],
+    title: 'on / off image prompt',
   });
   wrapperPrompt.append(audioPrompt, translatePrompt, volumePrompt, imagePrompt);
 
@@ -256,6 +259,15 @@ pageSignUp.onclick = () => {
 
 header.append(logout, pageSignIn, pageSignUp);
 document.querySelector('body').append(header);
+
+// const wrapperAutoPronunciation = createElement('div', {
+//   classList: ['wrapper-auto-pronunciation'],
+// });
+// const pronunciationAudio = createElement('div', {
+//   classList: ['pronunciation-audio'],
+//   title: 'pronunciation audio',
+// });
+// wrapperAutoPronunciation.append(pronunciationAudio);
 
 export {
   createSignPage,

@@ -42,7 +42,7 @@ export default class User {
       src: './src/assets/evening in Kair.jpg',
     });
     imageSentencesGame.onload = () => {
-      this.puzzle = createPuzzle();
+      this.puzzle = createPuzzle(this.sentences);
     };
 
     this.sentences.forEach((sentenceNode, index) => {

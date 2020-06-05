@@ -9,7 +9,6 @@
   width: 700px;
   position: relative;
   display: flex;
-  opacity: 0.7;
 }
 
 .wrapper-game-puzzle {
@@ -42,6 +41,12 @@
 .sentence-game-puzzle {
   display: flex;
   justify-content: center;
+}
+
+.assembled-sentence-game-puzzle {
+  display: flex;
+  justify-content: center;
+  opacity: .6;
 }
 
 .word-game {

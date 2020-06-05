@@ -23,23 +23,36 @@
   height: 30px;
   width: 30px;
   margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .audio-prompt {
-  background: url('../assets/img/micro.svg');
+  background: url('../assets/img/micro.svg'), #00c49d;
 }
 
 .translate-prompt {
-  background: url('../assets/img/translate-prompt.svg');
+  background: url('../assets/img/translate.svg'), #00c49d;
   background-size: 22px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .volume-prompt {
-  background: goldenrod;
+  background: url('../assets/img/music.svg'), #00c49d;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .image-prompt {
-  background: gold;
+  background: url('../assets/img/image.svg'), #00c49d;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pronunciation-audio {
+  background: url('../assets/img/micro.svg');
 }
