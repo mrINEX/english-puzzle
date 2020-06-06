@@ -10,7 +10,7 @@ window.onload = () => {
     createStartPage();
     const { level, page } = createMainPage();
     let current;
-    getPhrase(level.value, 13)
+    getPhrase(level.value, 29)
       .then((nodes) => {
         current = new User(nodes);
         const image = current.prepareForMakePuzzle();

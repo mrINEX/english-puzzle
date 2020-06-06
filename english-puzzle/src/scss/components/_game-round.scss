@@ -1,7 +1,12 @@
 .wrapper-game-round {
-  padding: 5px;
+  padding: 10px;
+  position: absolute;
 }
 
 .game-round-words {
   display: flex;
+}
+
+.pronunciation-text {
+  font-size: x-large;
 }

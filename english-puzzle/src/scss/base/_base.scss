@@ -32,15 +32,15 @@ body {
     z-index: 10;
 }
 
-.weather-opacity {
-    opacity: 0;
+.opacity-half {
+    opacity: .6;
     -webkit-transition: opacity 250ms;
     -moz-transition: opacity 250ms;
     -ms-transition: opacity 250ms;
     transition: opacity 250ms;
 }
 
-.weather-opacity-full {
+.opacity-full {
     opacity: 1;
 }
 

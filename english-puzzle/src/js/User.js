@@ -32,6 +32,7 @@ export default class User {
     console.log(this);
     const game = document.querySelector('.wrapper-game');
     const nav = document.querySelector('.main-page-nav');
+    const assembledGamePuzzle = document.querySelector('.wrapper-assembled-game-puzzle');
     const text = await translate(this.sentences[0].sentenceText);
 
     const wrapperAutoPronunciation = createElement('div', {
@@ -49,11 +50,12 @@ export default class User {
       title: 'pronunciation text',
       innerText: `${text}`,
     });
+    wrapperAutoPronunciation.append(pronunciationAudio, pronunciationText);
+    nav.after(wrapperAutoPronunciation);
 
     const wrapperGameRound = createElement('div', {
       classList: ['wrapper-game-round'],
     });
-
     const gameRoundWords = createElement('div', {
       classList: ['game-round-words'],
     });
@@ -62,11 +64,11 @@ export default class User {
     });
     wrapperGameRound.append(gameRoundWords, gameRoundControls);
 
+    const { bottom } = assembledGamePuzzle.children[0].getBoundingClientRect();
+    wrapperGameRound.setAttribute('style', `top: ${bottom - 35}px`);
+
     const shuffle = [...this.puzzle.children[0].children].sort(() => Math.random() - 0.5);
     gameRoundWords.append(...shuffle);
-
-    wrapperAutoPronunciation.append(pronunciationAudio, pronunciationText);
-    nav.after(wrapperAutoPronunciation);
     game.after(wrapperGameRound);
   }
 
