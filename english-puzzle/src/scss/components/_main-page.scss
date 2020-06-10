@@ -46,6 +46,16 @@
 .assembled-sentence-game-puzzle {
   display: flex;
   justify-content: center;
+  opacity: .7;
+}
+
+.assembled-word-game-puzzle {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
 }
 
 .word-game {

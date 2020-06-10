@@ -2,6 +2,7 @@ import { createSignPage, createStartPage, createMainPage } from './js/create';
 import createPuzzle from './js/createPuzzle';
 import getPhrase from './js/api.phrase';
 import User from './js/User';
+import './js/dragHandler';
 
 window.onload = () => {
   // signIN({ email: 'o@user.com', password: 'Gfhjkm_123' });

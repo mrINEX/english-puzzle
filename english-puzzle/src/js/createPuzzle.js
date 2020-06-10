@@ -34,9 +34,9 @@ export default (data) => {
       }
 
       const wordPuzzle = createElement('div', {
-        classList: ['word-game-puzzle'],
+        classList: ['word-game-puzzle', 'assembled-word-game-puzzle'],
         innerText: `${word.textContent}`,
-        draggable: true,
+        // draggable: true,
         'data-key-word': `${word.textContent}`,
         'data-key-sentence': `${heightIndex}`,
       }, {
@@ -60,6 +60,9 @@ export default (data) => {
       widthPuzzle += Number(bound.width);
 
       const assembledWordPuzzle = wordPuzzle.cloneNode(true);
+      assembledWordPuzzle.classList.remove('assembled-word-game-puzzle');
+      assembledWordPuzzle.textContent = '';
+      wordPuzzle.classList.remove('word-game-puzzle');
       if (!assembledWordPuzzle.classList.contains('last-puzzle')) {
         assembledWordPuzzle.classList.add('assembled-puzzle');
       }

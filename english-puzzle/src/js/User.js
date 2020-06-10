@@ -62,8 +62,14 @@ export default class User {
     const gameRoundControls = createElement('div', {
       classList: ['game-round-controls'],
     });
+    const dontKnow = createElement('botton', {
+      classList: ['btn'],
+      innerText: 'I don\'t know',
+    });
+    gameRoundControls.append(dontKnow);
     wrapperGameRound.append(gameRoundWords, gameRoundControls);
 
+    assembledGamePuzzle.children[0].classList.add('opacity-full');
     const { bottom } = assembledGamePuzzle.children[0].getBoundingClientRect();
     wrapperGameRound.setAttribute('style', `top: ${bottom - 35}px`);
 
