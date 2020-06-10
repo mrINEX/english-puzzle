@@ -11,3 +11,13 @@
 .pronunciation-text {
   font-size: x-large;
 }
+
+.correct-word {
+  box-shadow: inset 0px 0px 2px 3px greenyellow;
+  color: greenyellow;
+}
+
+.incorrect-word {
+  box-shadow: inset 0px 0px 2px 3px darkred;
+  color: darkred;
+}

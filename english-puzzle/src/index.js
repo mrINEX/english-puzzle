@@ -11,13 +11,13 @@ window.onload = () => {
     createStartPage();
     const { level, page } = createMainPage();
     let current;
-    getPhrase(level.value, 29)
+    getPhrase(level.value, page.value)
       .then((nodes) => {
         current = new User(nodes);
         const image = current.prepareForMakePuzzle();
         image.onload = () => {
           current.puzzle = createPuzzle(current.sentences);
-          current.runGame();
+          current.runGame(0);
         };
       });
 
@@ -25,6 +25,11 @@ window.onload = () => {
       getPhrase(level.value, page.value)
         .then((nodes) => {
           current = new User(nodes);
+          const image = current.prepareForMakePuzzle();
+          image.onload = () => {
+            current.puzzle = createPuzzle(current.sentences);
+            current.runGame(0);
+          };
         });
     });
 
@@ -32,6 +37,11 @@ window.onload = () => {
       getPhrase(level.value, page.value)
         .then((nodes) => {
           current = new User(nodes);
+          const image = current.prepareForMakePuzzle();
+          image.onload = () => {
+            current.puzzle = createPuzzle(current.sentences);
+            current.runGame(0);
+          };
         });
     });
   } else {

@@ -17,6 +17,11 @@ body {
     opacity: .5;
 }
 
+.event-none-opacity-full {
+    pointer-events: none;
+    opacity: 1;
+}
+
 .hidden {
     display: none;
 }
@@ -42,6 +47,7 @@ body {
 
 .opacity-full {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .fixed {

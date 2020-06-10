@@ -59,12 +59,22 @@ document.addEventListener('mouseup', (e) => {
     [...document.querySelector('.game-round-words').children].forEach((el) => {
       el.classList.remove('absolute');
     });
-    [...document.querySelector('.opacity-full').children].forEach((el) => {
+
+    let countFillRound = 0;
+    const currentSentence = document.querySelector('.opacity-full');
+    [...currentSentence.children].forEach((el) => {
       if (el.children.length) {
+        countFillRound += 1;
         el.children[0].classList.add('absolute');
         el.children[0].style.left = '0px';
         el.children[0].style.top = '0px';
       }
     });
+    if (countFillRound === currentSentence.children.length) {
+      currentSentence.classList.remove('opacity-full');
+      currentSentence.classList.add('event-none-opacity-full');
+      document.querySelector('.dont-know-botton').classList.add('hidden');
+      document.querySelector('.check-botton').classList.remove('hidden');
+    }
   }
 });
