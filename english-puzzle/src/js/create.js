@@ -185,11 +185,15 @@ function createMainPage() {
     classList: ['volume-prompt', 'prompt'],
     title: 'on / off volume prompt',
   });
-  const imagePrompt = createElement('div', {
-    classList: ['image-prompt', 'prompt'],
-    title: 'on / off image prompt',
+  const imageCardPrompt = createElement('div', {
+    classList: ['image-card-prompt', 'prompt'],
+    title: 'on / off card image prompt',
   });
-  wrapperPrompt.append(audioPrompt, translatePrompt, volumePrompt, imagePrompt);
+  const imageAllPrompt = createElement('div', {
+    classList: ['image-all-prompt', 'prompt'],
+    title: 'on / off cell image prompt',
+  });
+  wrapperPrompt.append(audioPrompt, translatePrompt, volumePrompt, imageCardPrompt, imageAllPrompt);
 
   mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);
   mainPage.append(mainPageNav);

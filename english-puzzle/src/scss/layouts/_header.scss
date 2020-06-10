@@ -51,9 +51,16 @@
   background-position: center;
 }
 
-.image-prompt {
+.image-card-prompt {
   background: url('../assets/img/image.svg'), #00c49d;
   background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.image-all-prompt {
+  background: url('../assets/img/imgCell.png'), #00c49d;
+  background-size: 25px;
   background-repeat: no-repeat;
   background-position: center;
 }

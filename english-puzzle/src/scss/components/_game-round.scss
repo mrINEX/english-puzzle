@@ -21,3 +21,13 @@
   box-shadow: inset 0px 0px 2px 3px darkred;
   color: darkred;
 }
+
+.correct-sentence {
+  border: 2px solid greenyellow;
+  background: greenyellow;
+}
+
+.incorrect-sentence {
+  border: 2px solid darkred;
+  background: darkred;
+}

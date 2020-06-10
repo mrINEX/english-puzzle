@@ -29,7 +29,7 @@ export default class User {
 
   async runGame(sentenceNumber) {
     this.sentenceNumber = sentenceNumber;
-    console.log(this, sentenceNumber);
+    console.log(this);
     const game = document.querySelector('.wrapper-game');
     const nav = document.querySelector('.main-page-nav');
     const assembledGamePuzzle = document.querySelector('.wrapper-assembled-game-puzzle');
@@ -155,7 +155,74 @@ export default class User {
       }
     };
     resultsBotton.onclick = () => {
-      console.log(assembledGamePuzzle);
+      const resultsPage = createElement('div', {
+        classList: ['results-page'],
+      });
+
+      const wrapperResults = createElement('div', {
+        classList: ['wrapper-results'],
+      });
+      const wrapperResultsImage = createElement('div', {
+        classList: ['wrapper-results-image'],
+      });
+      const wrapperResultsSentences = createElement('div', {
+        classList: ['wrapper-results-sentences'],
+      });
+      const resultKnow = createElement('div', {
+        classList: ['result-know'],
+      });
+      const resultDontKnow = createElement('div', {
+        classList: ['result-dont-know'],
+      });
+      wrapperResultsSentences.append(resultKnow, resultDontKnow);
+
+      [...assembledGamePuzzle.children].forEach((sentence, index) => {
+        const wrapperResult = createElement('div', {
+          classList: ['wrapper-result'],
+          'data-result-number-sentence': index,
+        });
+        const resultAudio = createElement('div', {
+          classList: ['result-audio'],
+        });
+        resultAudio.onclick = () => {
+          this.sentences[index].audio.play();
+        };
+        const resultSentence = createElement('div', {
+          classList: ['result-sentence'],
+          innerText: `${this.sentences[index].sentenceText}`,
+        });
+        wrapperResult.append(resultAudio, resultSentence);
+
+        const isCorrect = sentence.getAttribute('data-is-correct');
+        if (isCorrect === 'true') {
+          resultKnow.append(wrapperResult);
+        } else {
+          resultDontKnow.append(wrapperResult);
+        }
+      });
+      const titleKnow = createElement('h2', {
+        innerText: `I know ${resultKnow.children.length}`,
+      }, {
+        color: 'white',
+        background: '#98d33c',
+        borderRadius: '6px',
+        marginBottom: '5px',
+      });
+      resultKnow.prepend(titleKnow);
+
+      const titleDontKnow = createElement('h2', {
+        innerText: `I don't know ${resultDontKnow.children.length}`,
+      }, {
+        color: 'white',
+        background: '#bd3737',
+        borderRadius: '6px',
+        marginBottom: '5px',
+      });
+      resultDontKnow.prepend(titleDontKnow);
+
+      wrapperResults.append(wrapperResultsImage, wrapperResultsSentences);
+      resultsPage.append(wrapperResults);
+      document.querySelector('body').append(resultsPage);
     };
 
     gameRoundControls.append(dontKnowBotton, checkBotton, continueBotton, resultsBotton);
@@ -177,6 +244,7 @@ export default class User {
   }
 
   prepareForMakePuzzle() {
+    existRemove('.wrapper-game');
     const wrapperGame = createElement('div', { classList: ['wrapper-game'] });
     const wrapperSentencesGame = createElement('div', {
       classList: ['wrapper-sentences-game'],

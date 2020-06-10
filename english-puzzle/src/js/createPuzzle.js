@@ -1,7 +1,6 @@
 import createElement from './createElement';
 
 export default (data) => {
-  console.log(data);
   const wrapperGame = document.querySelector('.wrapper-game');
   const bounding = wrapperGame.getBoundingClientRect();
   const game = document.querySelector('.wrapper-sentences-game').children;
@@ -16,6 +15,7 @@ export default (data) => {
   [...game].forEach((sentence, heightIndex) => {
     const assembledSentencePuzzle = createElement('div', {
       classList: ['assembled-sentence-game-puzzle', `sentence-${heightIndex}`],
+      'data-sentence-text': data[heightIndex].sentenceText,
     });
     assembledPuzzleGame.append(assembledSentencePuzzle);
 
@@ -36,7 +36,6 @@ export default (data) => {
       const wordPuzzle = createElement('div', {
         classList: ['word-game-puzzle', 'assembled-word-game-puzzle'],
         innerText: `${word.textContent}`,
-        // draggable: true,
         'data-key-word': `${word.textContent}`,
         'data-key-sentence': `${heightIndex}`,
       }, {
