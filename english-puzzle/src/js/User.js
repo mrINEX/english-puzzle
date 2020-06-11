@@ -1,11 +1,16 @@
 import createElement from './createElement';
 import existRemove from './existRemove';
 import translate from './api.translate';
+import getLevelImage from '../assets/data_paintings/getLevel';
 
 export default class User {
   constructor(data) {
-    console.log('data:', data);
+    console.log('User data:', data);
     this.data = data;
+    this.level = data[0].group;
+    this.page = data[0].page;
+    this.levelImages = getLevelImage(this.level);
+    this.pageImage = this.levelImages[this.page];
     const sentences = [];
     data.sort(() => Math.random() - 0.5);
     data.forEach((value) => {
@@ -24,7 +29,7 @@ export default class User {
       }
     });
     console.log('sentences:', sentences);
-    this.sentences = sentences; // .sort(() => Math.random() - 0.5);
+    this.sentences = sentences;
   }
 
   async runGame(sentenceNumber) {
@@ -254,13 +259,15 @@ export default class User {
 
   prepareForMakePuzzle() {
     existRemove('.wrapper-game');
+
     const wrapperGame = createElement('div', { classList: ['wrapper-game'] });
     const wrapperSentencesGame = createElement('div', {
       classList: ['wrapper-sentences-game'],
     });
+    console.log(`./src/assets/data_paintings/${this.pageImage.imageSrc}`);
     const imageSentencesGame = createElement('img', {
       classList: ['image-sentences-game'],
-      src: './src/assets/evening in Kair.jpg',
+      src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
     });
 
     this.sentences.forEach((sentenceNode, index) => {
