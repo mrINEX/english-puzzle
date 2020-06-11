@@ -1,6 +1,8 @@
 import createElement from './createElement';
 import existRemove from './existRemove';
 import registration from './registration';
+import getPhrase from './api.phrase';
+import Game from './Game';
 import signIN from './signIn';
 import signUP from './signUp';
 
@@ -167,6 +169,18 @@ function createMainPage() {
     });
     selectLevelPage.append(option);
   }
+  selectLevel.onchange = () => {
+    getPhrase(selectLevel.value, selectLevelPage.value)
+      .then((nodes) => {
+        new Game(nodes).prepareForMakePuzzle();
+      });
+  };
+  selectLevelPage.onchange = () => {
+    getPhrase(selectLevel.value, selectLevelPage.value)
+      .then((nodes) => {
+        new Game(nodes).prepareForMakePuzzle();
+      });
+  };
   wrapperLevelPage.append(labelLevelPage, selectLevelPage);
 
   const wrapperPrompt = createElement('div', {
@@ -232,7 +246,11 @@ function createMainPage() {
   mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);
   mainPage.append(mainPageNav);
   document.querySelector('body').append(mainPage);
-  return { level: selectLevel, page: selectLevelPage };
+  getPhrase(selectLevel.value, selectLevelPage.value)
+    .then((nodes) => {
+      new Game(nodes).prepareForMakePuzzle();
+    });
+  // return { level: selectLevel, page: selectLevelPage };
 }
 
 function createStartPage() {
@@ -258,8 +276,8 @@ function createStartPage() {
     innerText: 'Start',
   });
   startPageButton.onclick = () => {
-    // existRemove('.start-page');
     startPage.remove();
+    createMainPage();
   };
   startPage.append(startPageTitle, startPageText, startPageButton);
   document.querySelector('body').append(startPage);

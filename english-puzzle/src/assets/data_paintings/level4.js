@@ -231,4 +231,12 @@ export default [
     author: 'MONET, Claude',
     year: '1914',
   },
+  {
+    id: '3_40',
+    name: 'Haymaking',
+    imageSrc: 'level3/3_40.jpg',
+    cutSrc: 'level3/cut/3_40.jpg',
+    author: 'GOYEN, Jan van',
+    year: '1630',
+  },
 ];

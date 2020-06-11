@@ -1,9 +1,10 @@
 import createElement from './createElement';
 import existRemove from './existRemove';
 import translate from './api.translate';
+import createPuzzle from './createPuzzle';
 import getLevelImage from '../assets/data_paintings/getLevel';
 
-export default class User {
+export default class Game {
   constructor(data) {
     console.log('User data:', data);
     this.data = data;
@@ -28,7 +29,7 @@ export default class User {
         sentences.push(sentenceNode);
       }
     });
-    console.log('sentences:', sentences);
+    console.log('User this full:', this);
     this.sentences = sentences;
   }
 
@@ -120,7 +121,7 @@ export default class User {
         const wrapperGame = document.querySelector('.wrapper-game');
         const imageSentencesGame = createElement('img', {
           classList: ['image-sentences-game'],
-          src: './src/assets/evening in Kair.jpg',
+          src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
         }, {
           zIndex: 50,
           position: 'absolute',
@@ -160,6 +161,8 @@ export default class User {
     };
     resultsBotton.onclick = () => {
       existRemove('.results-page');
+      document.querySelector('.main-page').classList.add('hidden');
+
       const resultsPage = createElement('div', {
         classList: ['results-page'],
       });
@@ -167,9 +170,28 @@ export default class User {
       const wrapperResults = createElement('div', {
         classList: ['wrapper-results'],
       });
+
       const wrapperResultsImage = createElement('div', {
         classList: ['wrapper-results-image'],
       });
+      const resultImage = createElement('img', {
+        classList: ['result-image'],
+        src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
+      }, {
+        width: '300px',
+      });
+      const resultAuthor = createElement('h4', {
+        innerText: `${this.pageImage.author}`,
+      }, {
+        color: 'darkslategray',
+      });
+      const resultNameImage = createElement('h4', {
+        innerText: `${this.pageImage.name}(${this.pageImage.year})`,
+      }, {
+        color: 'darkslategray',
+      });
+      wrapperResultsImage.append(resultImage, resultAuthor, resultNameImage);
+
       const wrapperResultsSentences = createElement('div', {
         classList: ['wrapper-results-sentences'],
       });
@@ -264,11 +286,14 @@ export default class User {
     const wrapperSentencesGame = createElement('div', {
       classList: ['wrapper-sentences-game'],
     });
-    console.log(`./src/assets/data_paintings/${this.pageImage.imageSrc}`);
     const imageSentencesGame = createElement('img', {
       classList: ['image-sentences-game'],
       src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
     });
+    imageSentencesGame.onload = () => {
+      this.puzzle = createPuzzle(this);
+      this.runGame(0);
+    };
 
     this.sentences.forEach((sentenceNode, index) => {
       const sentenceGame = createElement('div', {
@@ -287,6 +312,6 @@ export default class User {
     });
     wrapperGame.append(wrapperSentencesGame, imageSentencesGame);
     document.querySelector('.main-page').append(wrapperGame);
-    return imageSentencesGame;
+    // return imageSentencesGame;
   }
 }

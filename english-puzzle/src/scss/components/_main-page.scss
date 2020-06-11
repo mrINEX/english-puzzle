@@ -7,7 +7,7 @@
 }
 
 .wrapper-game {
-  width: 700px;
+  width: 800px;
   position: relative;
   display: flex;
 }
@@ -57,6 +57,7 @@
   align-items: center;
   cursor: grab;
   user-select: none;
+  text-shadow: 0 0 3px white;
 }
 
 .word-game {

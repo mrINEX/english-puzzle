@@ -25,6 +25,12 @@
   @extend %custom-scroll;
 }
 
+.result-image {
+  padding: 5px;
+  border: 1px solid black;
+  margin: 5px;
+}
+
 .wrapper-result {
   display: flex;
   padding: 2px 0;

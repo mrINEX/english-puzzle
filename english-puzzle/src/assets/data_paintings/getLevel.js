@@ -11,11 +11,11 @@ export default (num) => {
       return levelOne;
     case 1:
       return levelTwo;
-    case 3:
+    case 2:
       return levelThree;
-    case 4:
+    case 3:
       return levelFour;
-    case 5:
+    case 4:
       return levelFive;
     default:
       return levelSix;

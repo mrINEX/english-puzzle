@@ -1,6 +1,7 @@
 import createElement from './createElement';
 
 export default (data) => {
+  console.log('create elem:', data);
   const wrapperGame = document.querySelector('.wrapper-game');
   const bounding = wrapperGame.getBoundingClientRect();
   const game = document.querySelector('.wrapper-sentences-game').children;
@@ -15,7 +16,6 @@ export default (data) => {
   [...game].forEach((sentence, heightIndex) => {
     const assembledSentencePuzzle = createElement('div', {
       classList: ['assembled-sentence-game-puzzle', `sentence-${heightIndex}`],
-      'data-sentence-text': data[heightIndex].sentenceText,
     });
     assembledPuzzleGame.append(assembledSentencePuzzle);
 
@@ -41,10 +41,10 @@ export default (data) => {
       }, {
         width: `${width}px`,
         height: `${bound.height}px`,
-        background: 'url("./src/assets/evening in Kair.jpg")',
-        'background-size': `${bounding.width}px`,
-        'background-position-x': `-${widthPuzzle}px`,
-        'background-position-y': `-${bound.height * heightIndex}px`,
+        background: `url(./src/assets/data_paintings/${data.pageImage.imageSrc})`,
+        backgroundSize: `${bounding.width}px`,
+        backgroundPositionX: `-${widthPuzzle}px`,
+        backgroundPositionY: `-${bound.height * heightIndex}px`,
       });
 
       if (index === 0) {

@@ -231,4 +231,12 @@ export default [
     author: 'LEAR, Edward',
     year: '1864',
   },
+  {
+    id: '2_41',
+    name: 'Village Scene',
+    imageSrc: 'level2/2_41.jpg',
+    cutSrc: 'level2/cut/2_41.jpg',
+    author: 'DROOCHSLOOT, Joost Cornelisz.',
+    year: '1623',
+  },
 ];

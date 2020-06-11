@@ -1,7 +1,4 @@
-import { createSignPage, createStartPage, createMainPage } from './js/create';
-import createPuzzle from './js/createPuzzle';
-import getPhrase from './js/api.phrase';
-import User from './js/User';
+import { createSignPage, createStartPage } from './js/create';
 import './js/dragHandler';
 
 window.onload = () => {
@@ -9,41 +6,6 @@ window.onload = () => {
   const token = localStorage.getItem('token');
   if (token) {
     createStartPage();
-    const { level, page } = createMainPage();
-    let current;
-    getPhrase(level.value, page.value)
-      .then((nodes) => {
-        current = new User(nodes);
-        const image = current.prepareForMakePuzzle();
-        image.onload = () => {
-          current.puzzle = createPuzzle(current.sentences);
-          current.runGame(0);
-        };
-      });
-
-    level.addEventListener('change', () => {
-      getPhrase(level.value, page.value)
-        .then((nodes) => {
-          current = new User(nodes);
-          const image = current.prepareForMakePuzzle();
-          image.onload = () => {
-            current.puzzle = createPuzzle(current.sentences);
-            current.runGame(0);
-          };
-        });
-    });
-
-    page.addEventListener('change', () => {
-      getPhrase(level.value, page.value)
-        .then((nodes) => {
-          current = new User(nodes);
-          const image = current.prepareForMakePuzzle();
-          image.onload = () => {
-            current.puzzle = createPuzzle(current.sentences);
-            current.runGame(0);
-          };
-        });
-    });
   } else {
     createSignPage('IN');
   }
