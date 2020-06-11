@@ -189,10 +189,44 @@ function createMainPage() {
     classList: ['image-card-prompt', 'prompt'],
     title: 'on / off card image prompt',
   });
+  imageCardPrompt.onclick = () => {
+    const puzzleCards = document.querySelectorAll('.assembled-word-game-puzzle');
+
+    if (imageCardPrompt.classList.contains('disabled')) {
+      imageCardPrompt.classList.remove('disabled');
+      puzzleCards.forEach((puzzle) => {
+        const currentStyle = puzzle.getAttribute('style');
+        puzzle.setAttribute('style', `${currentStyle.replace('background: darkslategray;', '')}`);
+      });
+    } else {
+      imageCardPrompt.classList.add('disabled');
+      puzzleCards.forEach((puzzle) => {
+        const currentStyle = puzzle.getAttribute('style');
+        puzzle.setAttribute('style', `${currentStyle}background: darkslategray;`);
+      });
+    }
+  };
   const imageAllPrompt = createElement('div', {
     classList: ['image-all-prompt', 'prompt'],
     title: 'on / off cell image prompt',
   });
+  imageAllPrompt.onclick = () => {
+    const cellNests = document.querySelectorAll('.word-game-puzzle');
+
+    if (imageAllPrompt.classList.contains('disabled')) {
+      imageAllPrompt.classList.remove('disabled');
+      [...cellNests].forEach((puzzle) => {
+        const currentStyle = puzzle.getAttribute('style');
+        puzzle.setAttribute('style', `${currentStyle.replace('background: #6bc1b0;', '')}`);
+      });
+    } else {
+      imageAllPrompt.classList.add('disabled');
+      [...cellNests].forEach((puzzle) => {
+        const currentStyle = puzzle.getAttribute('style');
+        puzzle.setAttribute('style', `${currentStyle}background: #6bc1b0;`);
+      });
+    }
+  };
   wrapperPrompt.append(audioPrompt, translatePrompt, volumePrompt, imageCardPrompt, imageAllPrompt);
 
   mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);

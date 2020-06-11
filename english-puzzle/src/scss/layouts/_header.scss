@@ -68,3 +68,16 @@
 .pronunciation-audio {
   background: url('../assets/img/micro.svg');
 }
+
+.prompt-img-card-off {
+  background: darkslategray;
+}
+
+.prompt-img-cell-off {
+  background: #6bc1b0;
+}
+
+.disabled {
+  opacity: .6;
+  clip-path: polygon(100% 100%, 0% 100%, 0% 0%, 100% 0%, 26% 15%, 19% 25%, 38% 44%, 19% 64%, 31% 73%, 49% 54%, 67% 73%, 82% 69%, 61% 44%, 79% 24%, 68% 15%, 50% 34%, 26% 15%, 100% 0%);
+}

@@ -99,9 +99,8 @@ export default class User {
       });
       [...currentSentence.children].forEach((nest) => {
         const key = nest.getAttribute('data-key-word');
-        const wordPuzzle = [...gameRoundWords.children].find((node) => {
-          return node.getAttribute('data-key-word') === key;
-        });
+        const wordPuzzle = [...gameRoundWords.children]
+          .find((node) => node.getAttribute('data-key-word') === key);
         wordPuzzle.classList.add('absolute');
         wordPuzzle.style.left = '0px';
         wordPuzzle.style.top = '0px';
@@ -155,6 +154,7 @@ export default class User {
       }
     };
     resultsBotton.onclick = () => {
+      existRemove('.results-page');
       const resultsPage = createElement('div', {
         classList: ['results-page'],
       });
@@ -239,7 +239,16 @@ export default class User {
 
     const shuffle = [...this.puzzle.children[sentenceNumber].children]
       .sort(() => Math.random() - 0.5);
-    gameRoundWords.append(...shuffle);
+
+    const prompImgCardBotton = document.querySelector('.image-card-prompt');
+    shuffle.forEach((puzzle) => {
+      if (prompImgCardBotton.classList.contains('disabled')) {
+        const currentStyle = puzzle.getAttribute('style');
+        puzzle.setAttribute('style', `${currentStyle}background: darkslategray;`);
+      }
+      gameRoundWords.append(puzzle);
+    });
+
     game.after(wrapperGameRound);
   }
 
