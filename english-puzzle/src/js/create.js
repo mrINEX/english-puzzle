@@ -250,7 +250,6 @@ function createMainPage() {
     .then((nodes) => {
       new Game(nodes).prepareForMakePuzzle();
     });
-  // return { level: selectLevel, page: selectLevelPage };
 }
 
 function createStartPage() {

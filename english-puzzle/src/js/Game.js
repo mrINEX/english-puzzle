@@ -3,13 +3,20 @@ import existRemove from './existRemove';
 import translate from './api.translate';
 import createPuzzle from './createPuzzle';
 import getLevelImage from '../assets/data_paintings/getLevel';
+import getPhrase from './api.phrase';
+import statiscicsGame from './statisticsGame';
+import getTimeDate from './getDateTime';
+import storage from './storage';
 
 export default class Game {
   constructor(data) {
-    console.log('User data:', data);
     this.data = data;
+
     this.level = data[0].group;
     this.page = data[0].page;
+    this.nextLevel = this.page === 29 ? (this.level + 1) % 6 : this.level;
+    this.nextPage = (this.page + 1) % 30;
+
     this.levelImages = getLevelImage(this.level);
     this.pageImage = this.levelImages[this.page];
     const sentences = [];
@@ -115,19 +122,6 @@ export default class Game {
       checkBotton.classList.add('hidden');
       dontKnowBotton.classList.add('hidden');
       continueBotton.classList.remove('hidden');
-
-      if (this.sentenceNumber === 9) {
-        resultsBotton.classList.remove('hidden');
-        const wrapperGame = document.querySelector('.wrapper-game');
-        const imageSentencesGame = createElement('img', {
-          classList: ['image-sentences-game'],
-          src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
-        }, {
-          zIndex: 50,
-          position: 'absolute',
-        });
-        wrapperGame.append(imageSentencesGame);
-      }
     };
     checkBotton.onclick = () => {
       let countCorrectSentence = 0;
@@ -157,6 +151,29 @@ export default class Game {
     continueBotton.onclick = () => {
       if (this.sentenceNumber < 9) {
         this.runGame(this.sentenceNumber + 1);
+      } else if (this.sentenceNumber === 9) {
+        const currentGame = this.statisticsСollection();
+        storage(currentGame.innerHTML);
+        resultsBotton.classList.remove('hidden');
+        const wrapperGame = document.querySelector('.wrapper-game');
+        const imageSentencesGame = createElement('img', {
+          classList: ['image-sentences-game'],
+          src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
+        }, {
+          zIndex: 50,
+          position: 'absolute',
+        });
+        wrapperGame.append(imageSentencesGame);
+        this.sentenceNumber += 1;
+      } else {
+        existRemove('.results-page');
+        document.querySelector('.main-page').classList.remove('hidden');
+        document.querySelector('.select-level').value = this.nextLevel;
+        document.querySelector('.select-level-page').value = this.nextPage;
+        getPhrase(this.nextLevel, this.nextPage)
+          .then((nodes) => {
+            new Game(nodes).prepareForMakePuzzle();
+          });
       }
     };
     resultsBotton.onclick = () => {
@@ -247,7 +264,26 @@ export default class Game {
       });
       resultDontKnow.prepend(titleDontKnow);
 
-      wrapperResults.append(wrapperResultsImage, wrapperResultsSentences);
+      const wrapperResultsBotton = createElement('div', {
+        classList: ['wrapper-results-botton'],
+      }, {
+        display: 'flex',
+      });
+      const statisticBotton = createElement('botton', {
+        classList: ['btn', 'game-round-btn', 'statistic-botton'],
+        innerText: 'Statistic',
+      });
+      statisticBotton.onclick = () => {
+        document.querySelector('.results-page').classList.add('hidden');
+        const games = window.localStorage.getItem('english-puzzle-statistics');
+        if (games) {
+          const arr = JSON.parse(games);
+          statiscicsGame(arr);
+        }
+      };
+      wrapperResultsBotton.append(continueBotton, statisticBotton);
+
+      wrapperResults.append(wrapperResultsImage, wrapperResultsSentences, wrapperResultsBotton);
       resultsPage.append(wrapperResults);
       document.querySelector('body').append(resultsPage);
     };
@@ -255,10 +291,13 @@ export default class Game {
     gameRoundControls.append(dontKnowBotton, checkBotton, continueBotton, resultsBotton);
     wrapperGameRound.append(gameRoundWords, gameRoundControls);
 
+    if (sentenceNumber === 0) {
+      window.scrollTo({ top: 0 });
+    }
     assembledGamePuzzle.children[sentenceNumber].classList.add('opacity-full');
     const bounding = assembledGamePuzzle.children[sentenceNumber].getBoundingClientRect();
     if (sentenceNumber === 0) {
-      this.gameY = bounding.bottom - 35;
+      this.gameY = Math.abs(bounding.bottom - 35);
     } else {
       this.gameY += bounding.height;
     }
@@ -279,8 +318,59 @@ export default class Game {
     game.after(wrapperGameRound);
   }
 
+  statisticsСollection() {
+    const gameStatistics = createElement('div', {
+      classList: ['game-statistics'],
+    });
+    const dateStatistics = createElement('div', {
+      classList: ['date-statistics'],
+      innerText: `${getTimeDate()}`,
+    });
+    const levelAndPage = createElement('div', {
+      classList: ['levelAndPage'],
+      innerText: `Level: ${this.level + 1}. Page: ${this.page + 1}`,
+    });
+
+    const statisticsImage = createElement('div', {
+      classList: ['wrapper-results-image'],
+    });
+    const resultImage = createElement('img', {
+      classList: ['result-image'],
+      src: `./src/assets/data_paintings/${this.pageImage.imageSrc}`,
+    }, {
+      width: '300px',
+    });
+    const resultAuthor = createElement('h4', {
+      innerText: `${this.pageImage.author}`,
+    }, {
+      color: 'darkslategray',
+    });
+    const resultNameImage = createElement('h4', {
+      innerText: `${this.pageImage.name}(${this.pageImage.year})`,
+    }, {
+      color: 'darkslategray',
+    });
+    statisticsImage.append(resultImage, resultAuthor, resultNameImage);
+
+    const know = [...document.querySelector('.wrapper-assembled-game-puzzle').children]
+      .filter((sentence) => sentence.getAttribute('data-is-correct') === 'true');
+
+    const titleKnow = createElement('div', {
+      innerText: `I know ${know.length}`,
+    });
+    const titleDontKnow = createElement('div', {
+      innerText: `I don't know ${10 - know.length}`,
+    });
+
+    gameStatistics.append(statisticsImage, dateStatistics, levelAndPage);
+    gameStatistics.append(titleKnow, titleDontKnow);
+    return gameStatistics;
+  }
+
   prepareForMakePuzzle() {
     existRemove('.wrapper-game');
+
+    window.scrollTo({ top: 0 });
 
     const wrapperGame = createElement('div', { classList: ['wrapper-game'] });
     const wrapperSentencesGame = createElement('div', {
@@ -312,6 +402,5 @@ export default class Game {
     });
     wrapperGame.append(wrapperSentencesGame, imageSentencesGame);
     document.querySelector('.main-page').append(wrapperGame);
-    // return imageSentencesGame;
   }
 }
