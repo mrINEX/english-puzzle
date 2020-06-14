@@ -1,7 +1,6 @@
 import createElement from './createElement';
 
 export default (data) => {
-  console.log('create elem:', data);
   const wrapperGame = document.querySelector('.wrapper-game');
   const bounding = wrapperGame.getBoundingClientRect();
   const game = document.querySelector('.wrapper-sentences-game').children;

@@ -191,14 +191,42 @@ function createMainPage() {
     classList: ['audio-prompt', 'prompt'],
     title: 'on / off audio prompt',
   });
+  audioPrompt.onclick = () => {
+    if (audioPrompt.classList.contains('disabled')) {
+      audioPrompt.classList.remove('disabled');
+      document.querySelector('.pronunciation-audio').classList.remove('opacity-clear-zero');
+    } else {
+      audioPrompt.classList.add('disabled');
+      document.querySelector('.pronunciation-audio').classList.add('opacity-clear-zero');
+    }
+  };
+
   const translatePrompt = createElement('div', {
     classList: ['translate-prompt', 'prompt'],
     title: 'on / off translate prompt',
   });
+  translatePrompt.onclick = () => {
+    if (translatePrompt.classList.contains('disabled')) {
+      translatePrompt.classList.remove('disabled');
+      document.querySelector('.pronunciation-text').classList.remove('opacity-clear-zero');
+    } else {
+      translatePrompt.classList.add('disabled');
+      document.querySelector('.pronunciation-text').classList.add('opacity-clear-zero');
+    }
+  };
+
   const volumePrompt = createElement('div', {
     classList: ['volume-prompt', 'prompt'],
     title: 'on / off volume prompt',
   });
+  volumePrompt.onclick = () => {
+    if (volumePrompt.classList.contains('disabled')) {
+      volumePrompt.classList.remove('disabled');
+    } else {
+      volumePrompt.classList.add('disabled');
+    }
+  };
+
   const imageCardPrompt = createElement('div', {
     classList: ['image-card-prompt', 'prompt'],
     title: 'on / off card image prompt',
@@ -220,6 +248,7 @@ function createMainPage() {
       });
     }
   };
+
   const imageAllPrompt = createElement('div', {
     classList: ['image-all-prompt', 'prompt'],
     title: 'on / off cell image prompt',

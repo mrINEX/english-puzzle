@@ -36,13 +36,11 @@ export default class Game {
         sentences.push(sentenceNode);
       }
     });
-    console.log('User this full:', this);
     this.sentences = sentences;
   }
 
   async runGame(sentenceNumber) {
     this.sentenceNumber = sentenceNumber;
-    console.log(this);
     const game = document.querySelector('.wrapper-game');
     const nav = document.querySelector('.main-page-nav');
     const assembledGamePuzzle = document.querySelector('.wrapper-assembled-game-puzzle');
@@ -64,11 +62,21 @@ export default class Game {
     pronunciationAudio.onclick = () => {
       this.sentences[sentenceNumber].audio.play();
     };
+    const isDisabledAudio = document.querySelector('.audio-prompt').classList.contains('disabled');
+    if (isDisabledAudio) {
+      pronunciationAudio.classList.add('opacity-clear-zero');
+    }
+
     const pronunciationText = createElement('div', {
       classList: ['pronunciation-text'],
       title: 'pronunciation text',
       innerText: `${text}`,
     });
+    const isDisabledText = document.querySelector('.translate-prompt').classList.contains('disabled');
+    if (isDisabledText) {
+      pronunciationText.classList.add('opacity-clear-zero');
+    }
+
     wrapperAutoPronunciation.append(pronunciationAudio, pronunciationText);
     nav.after(wrapperAutoPronunciation);
 
@@ -100,7 +108,10 @@ export default class Game {
     });
 
     dontKnowBotton.onclick = () => {
-      this.sentences[sentenceNumber].audio.play();
+      const isDisabled = document.querySelector('.volume-prompt').classList.contains('disabled');
+      if (!isDisabled) {
+        this.sentences[sentenceNumber].audio.play();
+      }
       const currentSentence = assembledGamePuzzle.children[sentenceNumber];
       currentSentence.setAttribute('data-is-correct', false);
       currentSentence.classList.remove('opacity-full');
@@ -141,7 +152,10 @@ export default class Game {
       const isCorrectSentence = countCorrectSentence === lengthSentence;
       currentSentence.setAttribute('data-is-correct', `${isCorrectSentence}`);
       if (isCorrectSentence) {
-        this.sentences[sentenceNumber].audio.play();
+        const isDisabled = document.querySelector('.volume-prompt').classList.contains('disabled');
+        if (!isDisabled) {
+          this.sentences[sentenceNumber].audio.play();
+        }
         checkBotton.classList.add('hidden');
         continueBotton.classList.remove('hidden');
       } else {

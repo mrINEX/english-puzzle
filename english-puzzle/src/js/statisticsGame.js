@@ -19,6 +19,7 @@ export default (results) => {
 
   results.forEach((game) => {
     const div = createElement('div', {
+      classList: ['game-statistics'],
       innerHTML: `${game}`,
     });
     wrapperStatistics.append(div);

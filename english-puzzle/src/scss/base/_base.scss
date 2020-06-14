@@ -50,6 +50,10 @@ body {
     pointer-events: auto;
 }
 
+.opacity-clear-zero {
+    opacity: 0;
+}
+
 .fixed {
     position: fixed;
     z-index: 50;
