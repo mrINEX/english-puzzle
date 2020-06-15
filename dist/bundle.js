@@ -1803,6 +1803,11 @@ class Game {
         sentenceNode.words = sentence;
         sentenceNode.path = path;
         sentenceNode.audio = new Audio(path);
+
+        sentenceNode.audio.onended = () => {
+          document.querySelector('.pronunciation-audio').classList.remove('wave');
+        };
+
         sentenceNode.sentenceAudio = value.audioExample;
         sentences.push(sentenceNode);
       }
@@ -1834,6 +1839,8 @@ class Game {
 
       pronunciationAudio.onclick = () => {
         _this.sentences[sentenceNumber].audio.play();
+
+        pronunciationAudio.classList.add('wave');
       };
 
       var isDisabledAudio = document.querySelector('.audio-prompt').classList.contains('disabled');
@@ -1886,6 +1893,8 @@ class Game {
 
         if (!isDisabled) {
           _this.sentences[sentenceNumber].audio.play();
+
+          pronunciationAudio.classList.add('wave');
         }
 
         var currentSentence = assembledGamePuzzle.children[sentenceNumber];
@@ -1934,6 +1943,8 @@ class Game {
 
           if (!isDisabled) {
             _this.sentences[sentenceNumber].audio.play();
+
+            pronunciationAudio.classList.add('wave');
           }
 
           checkBotton.classList.add('hidden');

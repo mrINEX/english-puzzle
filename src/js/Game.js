@@ -32,6 +32,9 @@ export default class Game {
         sentenceNode.words = sentence;
         sentenceNode.path = path;
         sentenceNode.audio = new Audio(path);
+        sentenceNode.audio.onended = () => {
+          document.querySelector('.pronunciation-audio').classList.remove('wave');
+        };
         sentenceNode.sentenceAudio = value.audioExample;
         sentences.push(sentenceNode);
       }
@@ -61,6 +64,7 @@ export default class Game {
     });
     pronunciationAudio.onclick = () => {
       this.sentences[sentenceNumber].audio.play();
+      pronunciationAudio.classList.add('wave');
     };
     const isDisabledAudio = document.querySelector('.audio-prompt').classList.contains('disabled');
     if (isDisabledAudio) {
@@ -111,6 +115,7 @@ export default class Game {
       const isDisabled = document.querySelector('.volume-prompt').classList.contains('disabled');
       if (!isDisabled) {
         this.sentences[sentenceNumber].audio.play();
+        pronunciationAudio.classList.add('wave');
       }
       const currentSentence = assembledGamePuzzle.children[sentenceNumber];
       currentSentence.setAttribute('data-is-correct', false);
@@ -155,6 +160,7 @@ export default class Game {
         const isDisabled = document.querySelector('.volume-prompt').classList.contains('disabled');
         if (!isDisabled) {
           this.sentences[sentenceNumber].audio.play();
+          pronunciationAudio.classList.add('wave');
         }
         checkBotton.classList.add('hidden');
         continueBotton.classList.remove('hidden');
