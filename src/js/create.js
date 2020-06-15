@@ -275,6 +275,14 @@ function createMainPage() {
   mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);
   mainPage.append(mainPageNav);
   document.querySelector('body').append(mainPage);
+
+  const levelObj = window.localStorage.getItem('english-puzzle-levelObj');
+  if (levelObj) {
+    const obj = JSON.parse(levelObj);
+    selectLevel.value = obj.level;
+    selectLevelPage.value = obj.page;
+  }
+
   getPhrase(selectLevel.value, selectLevelPage.value)
     .then((nodes) => {
       new Game(nodes).prepareForMakePuzzle();

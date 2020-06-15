@@ -173,7 +173,7 @@ export default class Game {
         this.runGame(this.sentenceNumber + 1);
       } else if (this.sentenceNumber === 9) {
         const currentGame = this.statisticsСollection();
-        storage(currentGame.innerHTML);
+        storage(currentGame.innerHTML, { level: this.level, page: this.page });
         resultsBotton.classList.remove('hidden');
         const wrapperGame = document.querySelector('.wrapper-game');
         const imageSentencesGame = createElement('img', {

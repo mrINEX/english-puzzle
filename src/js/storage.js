@@ -1,4 +1,4 @@
-export default (storage) => {
+export default (storage, levelObj) => {
   const games = window.localStorage.getItem('english-puzzle-statistics');
   if (games) {
     const arr = JSON.parse(games);
@@ -7,4 +7,6 @@ export default (storage) => {
   } else {
     window.localStorage.setItem('english-puzzle-statistics', JSON.stringify([storage]));
   }
+
+  window.localStorage.setItem('english-puzzle-levelObj', JSON.stringify(levelObj));
 };

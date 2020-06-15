@@ -1960,7 +1960,10 @@ class Game {
         } else if (_this.sentenceNumber === 9) {
           var currentGame = _this.statisticsСollection();
 
-          Object(_storage__WEBPACK_IMPORTED_MODULE_8__["default"])(currentGame.innerHTML);
+          Object(_storage__WEBPACK_IMPORTED_MODULE_8__["default"])(currentGame.innerHTML, {
+            level: _this.level,
+            page: _this.page
+          });
           resultsBotton.classList.remove('hidden');
           var wrapperGame = document.querySelector('.wrapper-game');
           var imageSentencesGame = Object(_createElement__WEBPACK_IMPORTED_MODULE_0__["default"])('img', {
@@ -2596,6 +2599,14 @@ function createMainPage() {
   mainPageNav.append(wrapperLevel, wrapperLevelPage, wrapperPrompt);
   mainPage.append(mainPageNav);
   document.querySelector('body').append(mainPage);
+  var levelObj = window.localStorage.getItem('english-puzzle-levelObj');
+
+  if (levelObj) {
+    var obj = JSON.parse(levelObj);
+    selectLevel.value = obj.level;
+    selectLevelPage.value = obj.page;
+  }
+
   Object(_api_phrase__WEBPACK_IMPORTED_MODULE_3__["default"])(selectLevel.value, selectLevelPage.value).then(nodes => {
     new _Game__WEBPACK_IMPORTED_MODULE_4__["default"](nodes).prepareForMakePuzzle();
   });
@@ -3092,7 +3103,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (storage => {
+/* harmony default export */ __webpack_exports__["default"] = ((storage, levelObj) => {
   var games = window.localStorage.getItem('english-puzzle-statistics');
 
   if (games) {
@@ -3102,6 +3113,8 @@ __webpack_require__.r(__webpack_exports__);
   } else {
     window.localStorage.setItem('english-puzzle-statistics', JSON.stringify([storage]));
   }
+
+  window.localStorage.setItem('english-puzzle-levelObj', JSON.stringify(levelObj));
 });
 
 /***/ }),
