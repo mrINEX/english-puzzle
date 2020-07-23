@@ -1,4 +1,5 @@
 import createElement from './createElement';
+import pxTOvw from './pxTOvw';
 
 export default (data) => {
   const wrapperGame = document.querySelector('.wrapper-game');
@@ -38,12 +39,13 @@ export default (data) => {
         'data-key-word': `${word.textContent}`,
         'data-key-sentence': `${heightIndex}`,
       }, {
-        width: `${width}px`,
-        height: `${bound.height}px`,
+        width: `${pxTOvw(width)}vw`,
+        height: `${pxTOvw(bound.height)}vw`,
         background: `url(./src/assets/data_paintings/${data.pageImage.imageSrc})`,
-        backgroundSize: `${bounding.width}px`,
-        backgroundPositionX: `-${widthPuzzle}px`,
-        backgroundPositionY: `-${bound.height * heightIndex}px`,
+        backgroundSize: `${pxTOvw(bounding.width)}vw`,
+        backgroundPositionX: `-${pxTOvw(widthPuzzle)}vw`,
+        backgroundPositionY: `-${pxTOvw(bound.height * heightIndex)}vw`,
+        textShadow: 'white 0.1vw 0.1vw 1px, white -0.1vw -0.1vw 1px, white 0.1vw -0.1vw 1px, white -0.1vw 0.1vw 1px',
       });
 
       if (index === 0) {

@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  mode: 'development', // production
+  mode: 'production', // production development
   devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin(),
