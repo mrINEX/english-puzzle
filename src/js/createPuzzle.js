@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import pxTOvw from './pxTOvw';
+import { pxTOvw } from './pxTOvw';
 
 export default (data) => {
   const wrapperGame = document.querySelector('.wrapper-game');
